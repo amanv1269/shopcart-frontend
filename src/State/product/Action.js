@@ -75,3 +75,29 @@ export const deleteProduct = (productId) => async (dispatch) => {
     dispatch({ type: DELETE_PRODUCT_FAILURE, payload: error.message });
   }
 };
+
+export const findProductByCategory = (categories) => async (dispatch) => {
+  for (let i = 0; i < categories.length; i++) {
+    dispatch({
+      type: FIND_PRODUCT_BY_CATEGORY_REQUEST,
+      payload: categories[i],
+    });
+    console.log("array-->", categories[i]);
+    try {
+      const { data } = await api.get(
+          `/api/products/category?category=${categories[i]}`
+      );
+      console.log("$$$$$$$$$$$$$", data);
+      dispatch({
+        type: FIND_PRODUCT_BY_CATEGORY_SUCCESS,
+        payload: { category: categories[i], products: data },
+      });
+    } catch (error) {
+      dispatch({
+        type: FIND_PRODUCT_BY_CATEGORY_FAILURE,
+        payload: { category: categories[i], error: error.message },
+      });
+    }
+  }
+};
+
