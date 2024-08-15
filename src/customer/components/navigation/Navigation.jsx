@@ -262,7 +262,7 @@ export default function Navigation() {
                 leaveTo="-translate-x-full"
             >
               <Dialog.Panel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
-                <div className="flex px-4 pb-2 pt-5">
+                <div className="flex px-3 pb-2 pt-5">
                   <button
                       type="button"
                       className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
@@ -415,7 +415,7 @@ export default function Navigation() {
 
         <nav aria-label="Top" className="mx-auto">
           <div className="border-b border-gray-200">
-            <div className="flex h-16 items-center px-11">
+            <div className="flex h-16 items-center px-5">
               <button
                 type="button"
                 className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
@@ -606,12 +606,11 @@ export default function Navigation() {
                         }}
                       >
                         <MenuItem onClick={() => navigate("/account/order")}>
-                          {/* {auth.user?.role === "ROLE_ADMIN"
-                            ? "Admin Dashboard"*/}
-                          My Orders
+                          {auth.user?.role === "ADMIN" ? "Admin Dashboard" : "My Orders"}
                         </MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </Menu>
+
                     </div>
                   ) : (
                     <Button
