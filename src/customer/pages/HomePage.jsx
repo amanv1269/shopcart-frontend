@@ -63,24 +63,41 @@ import {WomensKurti} from "../components/data/WomensKurti";
 const productData = [
   "mens_kurta",
   "men_jeans",
-  "men_shirts",
-  "women_top",
+  "shirt",
+  "women_dress",
   "women_jeans",
 ];
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+
+  // Dispatch action to fetch products by category when component mounts
+  useEffect(() => {
+    dispatch(findProductByCategory(productData));
+  }, [dispatch]);
+
+  // Select product data from the Redux store
+  const { products, loading, error } = useSelector(
+      (state) => state.productCategory
+  );
+
   return (
-    <div>
-      <MainCarousel />
-      <div className="space-y-10 py-20 flex flex-col px-5 lg:px-10">
-        <HomeSectionCarouse data={WomensKurti} sectionName={"Men Kurta"} />
-        <HomeSectionCarouse data={WomensKurti} sectionName={"Men Jeans"} />
-        <HomeSectionCarouse data={WomensKurti} sectionName={"Men Shirt"} />
-        <HomeSectionCarouse data={WomensKurti} sectionName={"Women Top"} />
-        <HomeSectionCarouse data={WomensKurti} sectionName={"Women Jeans"} />
+      <div>
+        <MainCarousel/>
+        <div className="space-y-10 py-20 flex flex-col px-5 lg:px-10">
+          {productData.map((category, index) => (
+              <HomeSectionCarouse
+                  key={index}
+                  data={products[category] || []}
+                  sectionName={category.replace("_", " ")}
+                  loading={loading[category]}
+                  error={error[category]}
+              />
+          ))}
+        </div>
       </div>
-    </div>
   );
 };
+
 
 export default HomePage;

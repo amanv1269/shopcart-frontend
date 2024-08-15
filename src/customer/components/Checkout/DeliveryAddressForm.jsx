@@ -158,7 +158,7 @@ const DeliveryAddressForm = () => {
   const dispatch = useDispatch();
   const { auth } = useSelector((store) => store);
 
-  const addresses = auth.user?.addresses || [];
+  const addresses = auth.user?.address || [];
   const lastTwoAddresses = addresses.slice(-2);
   // console.log("---------->**************", lastTwoAddresses);
 
@@ -174,7 +174,7 @@ const DeliveryAddressForm = () => {
       city: data.get("city"),
       state: data.get("state"),
       zipCode: data.get("zipCode"),
-      mobile: data.get("phoneNumber"),
+      mobile: data.get("mobile"),
     };
     const orderData = { address, navigate };
 
@@ -189,6 +189,7 @@ const DeliveryAddressForm = () => {
 
     dispatch(createOrder(orderData));
   };
+  console.log("hsjhahduahwudhuwahh",addresses);
 
   return (
     <div>

@@ -114,12 +114,13 @@ const OrderSummary = () => {
   return (
     <div>
       <div className="p-5 shadow-lg rounded-s-md border">
-        <AddressCard address={order?.shippingAddress} />
+        <AddressCard address={order.order?.shippingAddress
+        } />
       </div>
       <div>
         <div className="lg:grid grid-cols-3 relative">
           <div className="col-span-2">
-            {order?.orderItems?.map((item) => (
+            {order.order?.orderItems?.map((item) => (
               <CartItem key={item.id} item={item} close={true} />
             ))}
           </div>
@@ -132,11 +133,11 @@ const OrderSummary = () => {
               <div className="space-y-3 font-semibold mb-10 mx-3">
                 <div className="flex justify-between pt-3 text-black">
                   <span>Price</span>
-                  <span className="text-green-600">₹{order?.totalPrice}</span>
+                  <span className="text-green-600">₹{order.order?.totalPrice}</span>
                 </div>
                 <div className="flex justify-between pt-3">
                   <span>Discount Price</span>
-                  <span className="text-green-600">-₹{order?.discount}</span>
+                  <span className="text-green-600">-₹{order.order?.discount}</span>
                 </div>
                 <div className="flex justify-between pt-3">
                   <span>Delivery Charge</span>
@@ -145,7 +146,7 @@ const OrderSummary = () => {
                 <div className="flex justify-between pt-3">
                   <span>Total Amount</span>
                   <span className="text-green-600">
-                    ₹{order?.totalDiscountedPrice}
+                    ₹{order.order?.totalDiscountedPrice}
                   </span>
                 </div>
               </div>
